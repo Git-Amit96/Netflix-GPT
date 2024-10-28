@@ -1,18 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import Login from "./Components/Login"; // Login component for the homepage
-import Browse from "./Components/Browse"; // Browse component for authenticated users
 import Sign from "./Components/Sign"; // Sign-up/Sign-in component
 import {createBrowserRouter, RouterProvider, Outlet, useNavigate} from "react-router-dom";
 import { Provider, useDispatch } from "react-redux";
 import AppStore from "./Utils/AppStore"; // Redux store
 import { onAuthStateChanged } from "firebase/auth"; // Firebase authentication listener
 import { auth } from "./Utils/Firebase"; // Firebase authentication instance
-import { addUser, removeUser } from "./Utils/UserSlice"; // Redux actions for adding/removing users
+import { addUser } from "./Utils/UserSlice"; // Redux actions for adding/removing users
 
 // Root element to render the application
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const Browse = React.lazy(() => import('./Components/Browse'));
+
 
 // Main App component handling authentication and navigation
 const App = () => {
@@ -28,8 +29,6 @@ const App = () => {
         dispatch(addUser({ uid, email, displayName, photoURL, phoneNumber })); // Dispatch user data to Redux store
         navigate("/browse"); // Redirect authenticated user to Browse page
       } else {
-        // No user is signed in
-        dispatch(removeUser()); // Clear user data from Redux store
         navigate("/"); // Redirect to Login page
       }
     });
@@ -54,7 +53,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/browse", // Browse page for authenticated users
-        element: <Browse />,
+        element: <Suspense fallback={<div>Loading...</div>}><Browse/></Suspense>
       },
       {
         path: "/sign", // Sign-up/Sign-in page

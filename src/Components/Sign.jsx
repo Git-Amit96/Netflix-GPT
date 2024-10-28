@@ -1,12 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { BackIMG, LOGO } from '../Utils/common';  // Import background image and logo from utilities
+import { BackIMG, LOGO, userLogo } from '../Utils/common';  // Import background image and logo from utilities
 import { Validate } from "../Utils/Validate";  // Custom validation function for email and password
 import { auth } from '../Utils/Firebase';  // Firebase authentication instance
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth/cordova';  // Firebase authentication methods
 import { updateProfile } from 'firebase/auth';  // Function to update user profile
 import { useDispatch } from 'react-redux';
 import { addUser } from '../Utils/UserSlice';  // Redux action to add user info to state
+
 
 const Sign = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Sign = () => {
     const name = useRef(null);
     const mobile = useRef(null);
 
-    // Function to validate input and handle authentication (Sign In / Sign Up)
+    // ! *********************** Function to validate input and handle authentication (Sign In / Sign Up) *********************
     const HandleValidation = () => {
         // Validate email and password inputs
         const validation = Validate(email.current.value, password.current.value);
@@ -34,12 +35,12 @@ const Sign = () => {
                     const user = userCredential.user;
                     updateProfile(user, {
                         displayName: name.current.value,
-                        photoURL: "https://img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg",
+                        photoURL: {userLogo},
                         phoneNumber: mobile.current.value,
                     }).then(() => {
                         const { uid, email, displayName, photoURL, phoneNumber } = auth.currentUser;
                         dispatch(addUser({ uid, email, displayName, photoURL, phoneNumber }));
-                        console.log("Profile updated");  // Log when profile is successfully updated
+                        // console.log("Profile updated");  // Log when profile is successfully updated
                     }).catch((error) => {
                         setIsMessage(error.message);  // Display error if profile update fails
                     });
@@ -61,7 +62,7 @@ const Sign = () => {
         }
     };
 
-    // Toggle between Sign In and Sign Up forms
+    //! *************************** Toggle between Sign In and Sign Up forms ***********************************
     const toggleSignIn = () => {
         setIsUserLogged(!isUserLogged);
     };

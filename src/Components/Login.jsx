@@ -1,6 +1,7 @@
 import React from 'react';
 import { BackIMG } from '../Utils/common';  // Import background image from common utilities
 import Header from './Header';  // Import the Header component
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -37,21 +38,24 @@ const Login = () => {
             </p>
 
             {/* Container for email input and "Get Started" button */}
-            <div className='flex justify-between items-center'>
+            <div className='flex justify-center items-center'>
 
               {/* Email input field */}
-              <input
+              {/* <input
                 type="text"
                 placeholder='Email'
                 className='bg-transparent text-white w-[60%] border border-white py-[0.5em] px-[1.25em] text-[1.3rem] rounded-md'
-              />
+              /> */}
 
               {/* "Get Started" button to initiate membership */}
-              <button
-                className='border border-white pl-2 bg-red-500 text-white box-border py-[0.5em] rounded-md font-bold w-[35%] text-[1.3rem]'
-              >
-                Get Started
-              </button>
+              <Link to="/Sign" className='s'>
+                <button
+                  className='border border-white bg-red-500 text-white box-border py-[0.5em] px-[1em] rounded-md font-bold text-[1.3rem]'
+                >
+                  Get Started
+                </button>
+
+              </Link>
 
             </div>
           </div>
