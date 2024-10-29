@@ -1,62 +1,48 @@
 import React from 'react';
-import { BackIMG } from '../Utils/common';  // Import background image from common utilities
-import Header from './Header';  // Import the Header component
+import { BackIMG } from '../Utils/common';
+import Header from './Header';
 import { Link } from 'react-router-dom';
 
 const Login = () => {
-
   return (
     <div>
-      {/* Header component to display the top navigation bar */}
       <Header />
 
-      {/* Main background image for the login page */}
       <div
         style={{ backgroundImage: `url(${BackIMG})` }}
-        className="bg-cover bg-center w-[100vw] h-[100vh]"
+        className="bg-cover bg-center w-full h-screen"
       >
+        <div className='w-full h-full bg-gradient-to-b from-black via-black/[0.55] to-black absolute flex items-center'>
+          <div className='text-white w-[90%] max-w-[600px] mx-auto text-center px-4'>
 
-        {/* Overlay with gradient to create a darkened effect on the background image */}
-        <div className='w-[100vw] h-[100vh] bg-gradient-to-b from-black via-black/[0.55] to-black absolute'>
-
-          {/* Main content container for the login page */}
-          <div className='m-auto mt-[35vh] text-white w-[40vw]'>
-
-            {/* Title text for the login page */}
-            <h1 className='text-[3.5rem] font-black text-center'>
+            <h1 className='text-3xl md:text-5xl font-black leading-tight'>
               Unlimited movies, TV shows and more
             </h1>
 
-            {/* Subtitle text with a brief offer */}
-            <p className='text-[1.5rem] font-medium text-center'>
+            <p className='text-lg md:text-2xl font-medium mt-4'>
               Starts at ₹149. Cancel at any time
             </p>
 
-            {/* Prompt to enter email to sign up or sign in */}
-            <p className='m-[1em] font-medium text-[1.1rem] text-center'>
+            <p className='mt-4 font-medium text-base md:text-lg'>
               Ready to watch? Enter your email to create or restart your membership.
             </p>
 
-            {/* Container for email input and "Get Started" button */}
-            <div className='flex justify-center items-center'>
-
+            <div className='flex flex-col md:flex-row items-center justify-center mt-6 space-y-4 md:space-y-0 md:space-x-4'>
+              
               {/* Email input field */}
-              {/* <input
+              <input
                 type="text"
                 placeholder='Email'
-                className='bg-transparent text-white w-[60%] border border-white py-[0.5em] px-[1.25em] text-[1.3rem] rounded-md'
-              /> */}
+                className='bg-transparent text-white w-full md:w-[60%] border border-white py-3 px-4 text-lg rounded-md'
+              />
 
-              {/* "Get Started" button to initiate membership */}
-              <Link to="/Sign" className='s'>
+              <Link to="/Sign">
                 <button
-                  className='border border-white bg-red-500 text-white box-border py-[0.5em] px-[1em] rounded-md font-bold text-[1.3rem]'
+                  className='border border-white bg-red-500 text-white py-3 px-6 rounded-md font-bold text-lg w-full md:w-auto'
                 >
                   Get Started
                 </button>
-
               </Link>
-
             </div>
           </div>
         </div>
