@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+  }
+
+  .text-shadow-lg {
+    text-shadow: 2px 2px 4px rgba(209, 218, 189, 0.5);
+  }

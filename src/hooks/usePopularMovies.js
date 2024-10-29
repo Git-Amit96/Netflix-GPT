@@ -10,7 +10,7 @@ export const usePopularMovies = () => {
         const movieData = await fetch(Movies_API, options)
         const json = await movieData.json();
         dispatch(addPopularMovies(json));
-        console.log(json)
+        console.log(json);
     }
 
     useEffect(() => {
